@@ -1,0 +1,132 @@
+#VRML_SIM R2023a utf8
+
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/floors/protos/RectangleArena.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/appearances/protos/OsbWood.proto"
+
+WorldInfo {
+}
+Viewpoint {
+  orientation -0.14080996195956413 -0.4405287746482279 -0.8866267271630586 0.6920154071259614
+  position -0.5343299141112094 0.26172032424932895 0.10429507100671054
+}
+RectangleArena {
+  translation -4.05924e-08 1.87709e-07 -0.04
+  rotation 0.9774071921221089 0.21136504154655075 -2.343280460602283e-09 4.80123e-06
+}
+PointLight {
+  attenuation 0 0 1
+  intensity 0.6
+  location 0 0.6 0
+}
+DEF SLOPE Solid {
+  translation 0 0 0.15
+  rotation 0 0.9992009587217893 0.039968038348871575 -0.5235996938995747
+  children [
+    Shape {
+      appearance OsbWood {
+        textureTransform TextureTransform {
+        }
+      }
+      geometry DEF BOX0 Box {
+        size 0.8 0.2 0.02
+      }
+    }
+  ]
+}
+DEF MyBot Robot {
+  translation -0.11084 -0.00354308 0.0935797
+  rotation -0.03548218736753029 0.8593396940554272 0.5101728183668158 -0.68
+  children [
+    HingeJoint {
+      jointParameters HingeJointParameters {
+        axis 0 2 0
+        anchor 0 0 0.025
+      }
+      device [
+        PositionSensor {
+        }
+        RotationalMotor {
+        }
+      ]
+      endPoint Solid {
+        rotation 0 1 0 0
+        children [
+          DEF WHEEL_2 Transform {
+            rotation 0.577883556445323 0.5770834407562329 -0.5770834407562329 -2.09
+            children [
+              Shape {
+                appearance PBRAppearance {
+                  baseColor 1 0 0
+                  roughness 1
+                  metalness 0
+                }
+                geometry Cylinder {
+                  height 0.1
+                  radius 0.0025
+                }
+              }
+            ]
+          }
+        ]
+        name "solid(1)"
+      }
+    }
+    Transform {
+      translation 0 0 0.0415
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColor 0.820075 0.364 0.8
+            roughness 1
+            metalness 0
+          }
+          geometry Cylinder {
+            height 0.08
+            radius 0.045
+          }
+        }
+      ]
+    }
+    HingeJoint {
+      jointParameters HingeJointParameters {
+        axis 0 1 0
+        anchor 0 0 0.025
+      }
+      device [
+        DEF left_wheel_motor RotationalMotor {
+          consumptionFactor 70
+        }
+        DEF left_wheel_sensor PositionSensor {
+        }
+      ]
+      endPoint Solid {
+        rotation 0 1 0 0
+        children [
+          DEF WHEEL Transform {
+            translation 0 0.045 0
+            rotation 0.577883556445323 0.5770834407562329 -0.5770834407562329 -2.09
+            children [
+              Shape {
+                appearance PBRAppearance {
+                  baseColor 1 0 0
+                  roughness 1
+                  metalness 0
+                }
+                geometry Cylinder {
+                  height 0.03
+                  radius 0.025
+                }
+              }
+            ]
+          }
+        ]
+      }
+    }
+    Altimeter {
+    }
+  ]
+  contactMaterial "body"
+}
+TexturedBackgroundLight {
+}
